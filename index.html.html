@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IBERO Tijuana — Licenciaturas e Ingenierías 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rojo: #E00034;
+      --rojo-dark: #b8002a;
+      --negro: #111111;
+      --gris-bg: #f6f6f8;
+      --gris-borde: #e2e2e6;
+      --gris-texto: #6b7280;
+      --blanco: #ffffff;
+      --verde: #25D366;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Poppins', sans-serif; background: #fff; color: var(--negro); overflow-x: hidden; }
+
+    /* HEADER */
+    .header {
+      background: var(--rojo);
+      padding: 16px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 999;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.15);
+    }
+    .header-logo { display: flex; flex-direction: column; line-height: 1.1; }
+    .header-logo .univ { font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 3px; color: rgba(255,255,255,0.55); text-transform: uppercase; }
+    .header-logo .nombre { font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 900; color: #fff; }
+    .header-logo .slogan { font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 2px; color: rgba(255,255,255,0.45); text-transform: uppercase; }
+    .header-nav { display: flex; align-items: center; gap: 24px; }
+    .header-nav a { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.8); text-decoration: none; letter-spacing: 0.5px; transition: color 0.2s; }
+    .header-nav a:hover { color: #fff; }
+    .header-cta {
+      background: #fff; color: var(--rojo) !important;
+      padding: 9px 22px; border-radius: 50px;
+      font-weight: 800 !important;
+    }
+    .header-cta:hover { background: var(--negro) !important; color: #fff !important; }
+
+    /* HERO */
+    .hero {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 640px; align-items: stretch;
+    }
+    .hero-left {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+      padding: 64px 56px;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .hero-left::before {
+      content: ''; position: absolute;
+      width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(224,0,52,0.15) 0%, transparent 70%);
+      top: -100px; left: -100px; pointer-events: none;
+    }
+    .hero-left::after {
+      content: ''; position: absolute;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(224,0,52,0.1) 0%, transparent 70%);
+      bottom: -80px; right: -80px; pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(224,0,52,0.2); border: 1px solid rgba(224,0,52,0.4);
+      color: #ff8099; font-family: 'Montserrat', sans-serif;
+      font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      padding: 6px 16px; border-radius: 50px; margin-bottom: 28px;
+      width: fit-content; position: relative; z-index: 1;
+    }
+    .hero-tag-dot { width: 6px; height: 6px; background: var(--rojo); border-radius: 50%; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+
+    .hero-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(32px, 3.5vw, 52px); font-weight: 900;
+      color: #fff; line-height: 1.08; letter-spacing: -1.5px;
+      margin-bottom: 20px; position: relative; z-index: 1;
+    }
+    .hero-title span { color: var(--rojo); }
+    .hero-sub {
+      font-size: 15px; color: rgba(255,255,255,0.6);
+      line-height: 1.7; margin-bottom: 40px;
+      max-width: 420px; position: relative; z-index: 1;
+    }
+    .hero-stats { display: flex; gap: 36px; position: relative; z-index: 1; }
+    .hs { display: flex; flex-direction: column; }
+    .hs-num { font-family: 'Montserrat', sans-serif; font-size: 34px; font-weight: 900; color: var(--rojo); line-height: 1; }
+    .hs-label { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+
+    /* HERO RIGHT FORM */
+    .hero-right {
+      background: #fff; display: flex; flex-direction: column;
+      border-left: 1px solid var(--gris-borde);
+    }
+    .form-header-card {
+      background: var(--rojo); padding: 0;
+    }
+    .prog-wrap { height: 3px; background: rgba(255,255,255,0.2); }
+    .prog { height: 100%; background: rgba(255,255,255,0.8); transition: width 0.4s ease; }
+    .form-header-text { padding: 20px 32px 22px; }
+    .fht-label { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px; color: rgba(255,255,255,0.5); text-transform: uppercase; margin-bottom: 5px; }
+    .fht-title { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 900; color: #fff; margin-bottom: 3px; }
+    .fht-sub { font-size: 12px; color: rgba(255,255,255,0.6); }
+
+    /* Steps */
+    .steps-bar {
+      display: flex; align-items: center; padding: 14px 24px;
+      background: var(--gris-bg); border-bottom: 1px solid var(--gris-borde);
+    }
+    .sb { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; position: relative; }
+    .sb:not(:last-child)::after {
+      content: ''; position: absolute; top: 13px;
+      left: calc(50% + 13px); right: calc(-50% + 13px);
+      height: 2px; background: var(--gris-borde); transition: background 0.4s; z-index: 0;
+    }
+    .sb.done:not(:last-child)::after,
+    .sb.active:not(:last-child)::after { background: var(--rojo); }
+    .sb-c {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--gris-borde); color: var(--gris-texto);
+      font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; z-index: 1; transition: all 0.3s;
+    }
+    .sb.active .sb-c { background: var(--rojo); color: #fff; box-shadow: 0 3px 10px rgba(224,0,52,0.4); }
+    .sb.done .sb-c { background: var(--rojo); color: #fff; }
+    .sb-l { font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 700; color: var(--gris-texto); text-transform: uppercase; letter-spacing: 0.5px; }
+    .sb.active .sb-l { color: var(--rojo); }
+
+    /* Form internals */
+    .form-body { padding: 24px 32px; flex: 1; overflow-y: auto; max-height: 520px; }
+    .form-sec { display: none; animation: fadeUp 0.35s ease both; }
+    .form-sec.active { display: block; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
+
+    .sec-h {
+      font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700;
+      color: var(--rojo); text-transform: uppercase; letter-spacing: 1.5px;
+      margin-bottom: 16px; padding-bottom: 10px;
+      border-bottom: 2px solid #fff0f3;
+    }
+
+    .fg { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .fg.full { grid-template-columns: 1fr; }
+    .fld { display: flex; flex-direction: column; gap: 5px; }
+    .fld label { font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 700; color: var(--negro); letter-spacing: 0.5px; text-transform: uppercase; }
+    .fld label .req { color: var(--rojo); }
+    .fld input, .fld select, .fld textarea {
+      font-family: 'Poppins', sans-serif; font-size: 13px; color: var(--negro);
+      background: var(--gris-bg); border: 1.5px solid var(--gris-borde);
+      border-radius: 8px; padding: 10px 12px;
+      transition: all 0.2s; outline: none; width: 100%;
+    }
+    .fld input:focus, .fld select:focus, .fld textarea:focus {
+      border-color: var(--rojo); background: #fff;
+      box-shadow: 0 0 0 3px rgba(224,0,52,0.08);
+    }
+    .fld select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236b7280' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; cursor: pointer;
+    }
+    .fld textarea { resize: vertical; min-height: 72px; }
+    .fld .hint { font-size: 10px; color: var(--gris-texto); }
+
+    .check-row { display: flex; flex-wrap: wrap; gap: 7px; }
+    .chk {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--gris-bg); border: 1.5px solid var(--gris-borde);
+      border-radius: 7px; padding: 7px 11px; cursor: pointer;
+      transition: all 0.2s; font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 500; color: var(--negro);
+    }
+    .chk input { width: 13px; height: 13px; accent-color: var(--rojo); background: none; border: none; box-shadow: none; padding: 0; flex-shrink: 0; }
+    .chk:has(input:checked) { border-color: var(--rojo); background: #fff0f3; color: var(--rojo); }
+
+    .form-footer-nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 32px; border-top: 1px solid var(--gris-borde); background: #fff;
+    }
+    .btn-back {
+      background: none; border: 1.5px solid var(--gris-borde); color: var(--gris-texto);
+      font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700;
+      padding: 10px 22px; border-radius: 50px; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-back:hover { border-color: var(--rojo); color: var(--rojo); }
+    .btn-next {
+      background: var(--rojo); border: none; color: #fff;
+      font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 800;
+      padding: 11px 28px; border-radius: 50px; cursor: pointer; transition: all 0.2s;
+      box-shadow: 0 4px 16px rgba(224,0,52,0.35);
+    }
+    .btn-next:hover { background: var(--rojo-dark); transform: translateY(-2px); }
+    .btn-submit {
+      background: linear-gradient(135deg, var(--verde), #1aab52); border: none; color: #fff;
+      font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 800;
+      padding: 12px 28px; border-radius: 50px; cursor: pointer; transition: all 0.2s;
+      box-shadow: 0 4px 18px rgba(37,211,102,0.4);
+    }
+    .btn-submit:hover { transform: translateY(-2px); }
+    .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+
+    .form-success { display: none; text-align: center; padding: 36px 28px; }
+    .form-success.active { display: block; animation: fadeUp 0.5s ease both; }
+    .success-circle {
+      width: 60px; height: 60px; background: linear-gradient(135deg, var(--verde), #1aab52);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px; box-shadow: 0 6px 24px rgba(37,211,102,0.4);
+      animation: pop 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    @keyframes pop { from{transform:scale(0);opacity:0;} to{transform:scale(1);opacity:1;} }
+    .form-success h3 { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 900; color: var(--negro); margin-bottom: 8px; }
+    .form-success h3 span { color: var(--rojo); }
+    .form-success p { font-size: 13px; color: var(--gris-texto); line-height: 1.6; max-width: 300px; margin: 0 auto 22px; }
+    .wa-link-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--verde), #1aab52); color: #fff;
+      text-decoration: none; font-family: 'Montserrat', sans-serif;
+      font-size: 13px; font-weight: 800; padding: 12px 24px; border-radius: 50px;
+      box-shadow: 0 4px 18px rgba(37,211,102,0.4); transition: all 0.2s;
+    }
+    .wa-link-btn:hover { transform: translateY(-2px); }
+
+    /* INFO BAR */
+    .info-bar {
+      background: linear-gradient(291deg, #0a0a0a 0%, #1a1a2e 50%, #2d0010 100%);
+      background-size: 200% 200%;
+      animation: gradShift 8s ease infinite alternate;
+      padding: 40px 48px;
+    }
+    @keyframes gradShift { 0%{background-position:0% 50%;} 100%{background-position:100% 50%;} }
+    .info-bar-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; }
+    .info-col { text-align: center; }
+    .info-icon { font-size: 28px; margin-bottom: 10px; display: block; }
+    .info-label { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px; color: rgba(255,255,255,0.4); text-transform: uppercase; margin-bottom: 6px; }
+    .info-val { font-family: 'Montserrat', sans-serif; font-size: 19px; font-weight: 900; color: #fff; line-height: 1.3; }
+    .info-sub { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 4px; }
+
+    /* SECTIONS */
+    .section { max-width: 1200px; margin: 0 auto; padding: 80px 48px; }
+    .sec-label {
+      font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700;
+      color: var(--rojo); letter-spacing: 2.5px; text-transform: uppercase;
+      margin-bottom: 10px; display: flex; align-items: center; gap: 10px;
+    }
+    .sec-label::before { content:''; display:block; width:22px; height:2px; background:var(--rojo); }
+    .sec-title { font-family: 'Montserrat', sans-serif; font-size: clamp(26px, 3vw, 42px); font-weight: 900; color: var(--negro); line-height: 1.1; letter-spacing: -0.5px; margin-bottom: 16px; }
+    .sec-desc { font-size: 15px; color: var(--gris-texto); line-height: 1.75; max-width: 580px; margin-bottom: 48px; }
+
+    /* OBJETIVO */
+    .objetivo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .obj-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .obj-card {
+      background: var(--gris-bg); border-radius: 14px; padding: 22px;
+      border: 1.5px solid var(--gris-borde); transition: all 0.3s;
+    }
+    .obj-card:hover { border-color: var(--rojo); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(224,0,52,0.1); }
+    .obj-ico { font-size: 26px; margin-bottom: 10px; }
+    .obj-title { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 800; color: var(--negro); margin-bottom: 6px; }
+    .obj-desc { font-size: 12px; color: var(--gris-texto); line-height: 1.55; }
+
+    /* CARRERAS */
+    .carreras-section {
+      background: linear-gradient(291deg, #0a0a0a 0%, #b8002a 50%, #E00034 100%);
+      background-size: 200% 200%;
+      animation: gradShift 10s ease infinite alternate;
+      padding: 80px 0;
+    }
+    .carreras-inner { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+    .carreras-header { margin-bottom: 40px; }
+    .carreras-header .sec-label { color: rgba(255,255,255,0.55); }
+    .carreras-header .sec-label::before { background: rgba(255,255,255,0.4); }
+    .carreras-header .sec-title { color: #fff; }
+    .carreras-header .sec-desc { color: rgba(255,255,255,0.6); margin-bottom: 0; }
+
+    .areas-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+    .tab-btn {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.7); font-family: 'Montserrat', sans-serif;
+      font-size: 11px; font-weight: 700; padding: 8px 18px; border-radius: 50px;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .tab-btn.active, .tab-btn:hover { background: #fff; color: var(--rojo); border-color: #fff; }
+
+    .carreras-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+    .carrera-card {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 14px; padding: 22px 22px 18px;
+      transition: all 0.3s; display: flex; flex-direction: column; gap: 6px;
+    }
+    .carrera-card:hover { background: rgba(255,255,255,0.16); border-color: rgba(255,255,255,0.45); transform: translateY(-4px); }
+    .carrera-card.oculta { display: none; }
+    .carrera-area { font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+    .carrera-ico { font-size: 30px; margin: 4px 0; }
+    .carrera-nombre { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 800; color: #fff; line-height: 1.3; }
+    .carrera-grado { font-size: 11px; color: rgba(255,255,255,0.5); }
+    .carrera-link {
+      margin-top: 10px; display: inline-flex; align-items: center; gap: 5px;
+      color: rgba(255,255,255,0.6); font-family: 'Montserrat', sans-serif;
+      font-size: 11px; font-weight: 700; text-decoration: none; transition: color 0.2s;
+    }
+    .carrera-card:hover .carrera-link { color: #fff; }
+
+    /* ACORDEÓN */
+    .faq-list { display: flex; flex-direction: column; gap: 10px; max-width: 860px; }
+    .faq-item { border: 1.5px solid var(--gris-borde); border-radius: 12px; overflow: hidden; transition: border-color 0.2s; }
+    .faq-item.open { border-color: var(--rojo); }
+    .faq-q {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 22px; cursor: pointer;
+      font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; color: var(--negro);
+      background: #fff; gap: 16px; transition: background 0.2s;
+    }
+    .faq-item.open .faq-q { background: #fff5f7; color: var(--rojo); }
+    .faq-ico {
+      width: 24px; height: 24px; border-radius: 50%;
+      background: var(--gris-bg); color: var(--gris-texto);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0; transition: all 0.3s;
+    }
+    .faq-item.open .faq-ico { background: var(--rojo); color: #fff; transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+      font-size: 14px; color: var(--gris-texto); line-height: 1.7; padding: 0 22px;
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding: 0 22px 18px; }
+
+    /* FOOTER */
+    .footer { background: var(--rojo); padding: 56px 48px 32px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 48px; }
+    .ft-name { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 900; color: #fff; line-height: 1; }
+    .ft-univ { font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 2.5px; color: rgba(255,255,255,0.45); text-transform: uppercase; margin-bottom: 14px; }
+    .ft-desc { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.65; margin-bottom: 22px; max-width: 270px; }
+    .ft-wa {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+      color: #fff; text-decoration: none;
+      font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700;
+      padding: 10px 20px; border-radius: 50px; transition: all 0.2s;
+    }
+    .ft-wa:hover { background: rgba(255,255,255,0.25); }
+    .ft-col-title { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 800; color: #fff; margin-bottom: 14px; }
+    .ft-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .ft-list li { font-size: 13px; color: rgba(255,255,255,0.6); }
+    .ft-list a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+    .ft-list a:hover { color: #fff; }
+    .footer-bottom {
+      max-width: 1200px; margin: 32px auto 0; padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+    }
+    .footer-bottom p, .footer-bottom a { font-size: 12px; color: rgba(255,255,255,0.4); text-decoration: none; }
+    .footer-bottom a:hover { color: rgba(255,255,255,0.8); }
+
+    /* WA flotante */
+    .wa-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 9000;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: var(--verde); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; box-shadow: 0 6px 24px rgba(37,211,102,0.5);
+      animation: waFloat 3s ease-in-out infinite;
+    }
+    .wa-float:hover { transform: scale(1.1) !important; animation: none; }
+    @keyframes waFloat { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-7px);} }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 48px 32px; min-height: 380px; }
+      .info-bar-inner { grid-template-columns: repeat(2,1fr); }
+      .objetivo-grid { grid-template-columns: 1fr; gap: 40px; }
+      .carreras-grid { grid-template-columns: repeat(2,1fr); }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .header { padding: 14px 20px; }
+      .header-nav { display: none; }
+      .hero-left { padding: 36px 20px; }
+      .info-bar { padding: 32px 20px; }
+      .section { padding: 60px 20px; }
+      .carreras-inner { padding: 0 20px; }
+      .carreras-grid { grid-template-columns: 1fr; }
+      .footer { padding: 48px 20px 28px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+      .fg { grid-template-columns: 1fr; }
+      .form-body { padding: 18px 18px; max-height: none; }
+      .form-footer-nav { padding: 16px 18px; }
+      .form-header-text { padding: 16px 18px 18px; }
+      .steps-bar { padding: 12px 14px; }
+      .objetivo-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ HEADER ══════════ -->
+<header class="header">
+  <div class="header-logo">
+    <span class="univ">Universidad Iberoamericana</span>
+    <span class="nombre">IBERO Tijuana</span>
+    <span class="slogan">Hazlo Realidad</span>
+  </div>
+  <nav class="header-nav">
+    <a href="#carreras">Carreras</a>
+    <a href="#proceso">Proceso</a>
+    <a href="#preguntas">FAQ</a>
+    <a href="#hero" class="header-cta">Registrarse</a>
+  </nav>
+</header>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero" id="hero">
+  <!-- Izquierda -->
+  <div class="hero-left">
+    <div class="hero-tag"><span class="hero-tag-dot"></span>Admisiones 2026 Abiertas</div>
+    <h1 class="hero-title">Tu carrera<br/>empieza en<br/><span>IBERO Tijuana</span></h1>
+    <p class="hero-sub">Somos parte de la red universitaria jesuita más grande del mundo. 11 carreras diseñadas para transformar tu vida y la de tu comunidad.</p>
+    <div class="hero-stats">
+      <div class="hs"><span class="hs-num">11</span><span class="hs-label">Carreras</span></div>
+      <div class="hs"><span class="hs-num">+50</span><span class="hs-label">Años</span></div>
+      <div class="hs"><span class="hs-num">100%</span><span class="hs-label">Presencial</span></div>
+    </div>
+  </div>
+
+  <!-- Derecha: formulario multi-paso -->
+  <div class="hero-right">
+    <div class="form-header-card">
+      <div class="prog-wrap"><div class="prog" id="prog" style="width:25%"></div></div>
+      <div class="form-header-text">
+        <div class="fht-label">Registro de Aspirante</div>
+        <div class="fht-title" id="form-title">Datos Personales</div>
+        <div class="fht-sub" id="form-sub">Cuéntanos un poco sobre ti para comenzar tu proceso.</div>
+      </div>
+    </div>
+
+    <div class="steps-bar">
+      <div class="sb active" id="sb-1"><div class="sb-c">1</div><span class="sb-l">Personal</span></div>
+      <div class="sb" id="sb-2"><div class="sb-c">2</div><span class="sb-l">Académico</span></div>
+      <div class="sb" id="sb-3"><div class="sb-c">3</div><span class="sb-l">Carrera</span></div>
+      <div class="sb" id="sb-4"><div class="sb-c">4</div><span class="sb-l">Contacto</span></div>
+    </div>
+
+    <div class="form-body">
+      <form id="main-form" action="https://formspree.io/f/xrealyle" method="POST">
+
+        <!-- PASO 1 -->
+        <div class="form-sec active" id="sec-1">
+          <div class="sec-h">👤 Información Personal</div>
+          <div class="fg">
+            <div class="fld"><label>Nombre(s) <span class="req">*</span></label><input type="text" name="Nombres" placeholder="Ej. María" required/></div>
+            <div class="fld"><label>Apellido Paterno <span class="req">*</span></label><input type="text" name="Apellido Paterno" placeholder="Ej. García" required/></div>
+          </div>
+          <div class="fg">
+            <div class="fld"><label>Apellido Materno</label><input type="text" name="Apellido Materno" placeholder="Ej. López"/></div>
+            <div class="fld"><label>Fecha de Nacimiento <span class="req">*</span></label><input type="date" name="Fecha de Nacimiento" required/></div>
+          </div>
+          <div class="fg">
+            <div class="fld"><label>Género <span class="req">*</span></label>
+              <select name="Genero" required>
+                <option value="" disabled selected>Selecciona</option>
+                <option>Masculino</option><option>Femenino</option><option>Prefiero no decir</option>
+              </select>
+            </div>
+            <div class="fld"><label>CURP</label><input type="text" name="CURP" placeholder="18 caracteres" maxlength="18" style="text-transform:uppercase"/><span class="hint">Solo si cuentas con ella</span></div>
+          </div>
+          <div class="fg full">
+            <div class="fld"><label>Ciudad de Residencia <span class="req">*</span></label>
+              <select name="Ciudad" required>
+                <option value="" disabled selected>Selecciona tu ciudad</option>
+                <option>Tijuana</option><option>Ensenada</option><option>Mexicali</option>
+                <option>Tecate</option><option>Rosarito</option><option>San Diego, CA</option>
+                <option>Otra ciudad de México</option><option>Estados Unidos</option><option>Otro país</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- PASO 2 -->
+        <div class="form-sec" id="sec-2">
+          <div class="sec-h">🎓 Antecedentes Académicos</div>
+          <div class="fg full"><div class="fld"><label>Nombre de tu Preparatoria <span class="req">*</span></label><input type="text" name="Preparatoria" placeholder="Ej. CETYS, CBTIS, Colegio América..." required/></div></div>
+          <div class="fg">
+            <div class="fld"><label>Tipo de Bachillerato <span class="req">*</span></label>
+              <select name="Tipo Bachillerato" required>
+                <option value="" disabled selected>Selecciona</option>
+                <option>Pública</option><option>Privada</option><option>Sistema abierto / a distancia</option>
+              </select>
+            </div>
+            <div class="fld"><label>Promedio General <span class="req">*</span></label>
+              <select name="Promedio" required>
+                <option value="" disabled selected>Selecciona rango</option>
+                <option>10.0 - 9.5 (Excelente)</option><option>9.4 - 8.5 (Muy Bueno)</option>
+                <option>8.4 - 7.5 (Bueno)</option><option>7.4 - 7.0 (Regular)</option><option>Menos de 7.0</option>
+              </select>
+            </div>
+          </div>
+          <div class="fg">
+            <div class="fld"><label>Año de Egreso <span class="req">*</span></label>
+              <select name="Año Egreso" required>
+                <option value="" disabled selected>Selecciona</option>
+                <option>2026</option><option>2025</option><option>2024</option><option>2023</option><option>2023 o anterior</option>
+              </select>
+            </div>
+            <div class="fld"><label>Estado Actual <span class="req">*</span></label>
+              <select name="Estado Academico" required>
+                <option value="" disabled selected>Selecciona</option>
+                <option>Cursando último año</option><option>Ya egresé</option><option>Tengo estudios universitarios previos</option>
+              </select>
+            </div>
+          </div>
+          <div class="fg full">
+            <div class="fld"><label>Nivel de Inglés</label>
+              <div class="check-row">
+                <label class="chk"><input type="radio" name="Nivel Ingles" value="Básico"/> Básico</label>
+                <label class="chk"><input type="radio" name="Nivel Ingles" value="Intermedio"/> Intermedio</label>
+                <label class="chk"><input type="radio" name="Nivel Ingles" value="Avanzado"/> Avanzado</label>
+                <label class="chk"><input type="radio" name="Nivel Ingles" value="Nativo/Bilingüe"/> Nativo/Bilingüe</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PASO 3 -->
+        <div class="form-sec" id="sec-3">
+          <div class="sec-h">🎯 Carrera de Interés</div>
+          <div class="fg full">
+            <div class="fld"><label>Carrera de Interés <span class="req">*</span></label>
+              <select name="Carrera de Interes" required>
+                <option value="" disabled selected>Selecciona tu carrera</option>
+                <optgroup label="— Ciencias de la Salud —">
+                  <option>Lic. en Medicina</option>
+                  <option>Lic. en Nutrición</option>
+                  <option>Lic. en Enfermería</option>
+                </optgroup>
+                <optgroup label="— Ingeniería —">
+                  <option>Ing. en Mecatrónica</option>
+                  <option>Ing. Industrial en Manufactura Inteligente</option>
+                </optgroup>
+                <optgroup label="— Negocios —">
+                  <option>Lic. en Administración de Empresas</option>
+                  <option>Lic. en Administración de Negocios Internacionales</option>
+                </optgroup>
+                <optgroup label="— Social y Humanidades —">
+                  <option>Lic. en Derecho</option>
+                  <option>Lic. en Comunicación</option>
+                  <option>Lic. en Psicología</option>
+                </optgroup>
+                <optgroup label="— Arte y Diseño —">
+                  <option>Lic. en Arquitectura</option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+          <div class="fg full">
+            <div class="fld"><label>¿Te interesa información sobre Becas?</label>
+              <div class="check-row">
+                <label class="chk"><input type="radio" name="Interes Beca" value="Sí"/> Sí, me interesa</label>
+                <label class="chk"><input type="radio" name="Interes Beca" value="No"/> No por el momento</label>
+              </div>
+            </div>
+          </div>
+          <div class="fg full">
+            <div class="fld"><label>¿Cómo te enteraste de IBERO Tijuana?</label>
+              <div class="check-row">
+                <label class="chk"><input type="checkbox" name="Como se entero" value="Redes sociales"/> Redes sociales</label>
+                <label class="chk"><input type="checkbox" name="Como se entero" value="Recomendación"/> Recomendación</label>
+                <label class="chk"><input type="checkbox" name="Como se entero" value="Feria universitaria"/> Feria universitaria</label>
+                <label class="chk"><input type="checkbox" name="Como se entero" value="Google/Internet"/> Google/Internet</label>
+                <label class="chk"><input type="checkbox" name="Como se entero" value="Radio/TV"/> Radio/TV</label>
+                <label class="chk"><input type="checkbox" name="Como se entero" value="Ex-alumno IBERO"/> Ex-alumno</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PASO 4 -->
+        <div class="form-sec" id="sec-4">
+          <div class="sec-h">📱 Datos de Contacto</div>
+          <div class="fg">
+            <div class="fld"><label>Correo Electrónico <span class="req">*</span></label><input type="email" name="email" placeholder="tu@correo.com" required/></div>
+            <div class="fld"><label>WhatsApp / Celular <span class="req">*</span></label><input type="tel" name="WhatsApp" placeholder="664 000 0000" required/><span class="hint">Te contactaremos por aquí</span></div>
+          </div>
+          <div class="fg">
+            <div class="fld"><label>Teléfono de Casa</label><input type="tel" name="Telefono Casa" placeholder="664 000 0000"/></div>
+            <div class="fld"><label>Nombre del Padre/Tutor <span class="req">*</span></label><input type="text" name="Nombre Tutor" placeholder="Nombre completo" required/></div>
+          </div>
+          <div class="fg">
+            <div class="fld"><label>Teléfono del Tutor <span class="req">*</span></label><input type="tel" name="Telefono Tutor" placeholder="664 000 0000" required/></div>
+            <div class="fld"><label>Relación con el Tutor</label>
+              <select name="Relacion Tutor">
+                <option value="" disabled selected>Selecciona</option>
+                <option>Padre</option><option>Madre</option><option>Tutor legal</option><option>Otro familiar</option>
+              </select>
+            </div>
+          </div>
+          <div class="fg full"><div class="fld"><label>Comentarios o Preguntas</label><textarea name="Comentarios" placeholder="Escribe aquí cualquier duda o comentario..."></textarea></div></div>
+          <div class="fg full">
+            <div class="fld">
+              <label class="chk" style="width:100%;border-radius:8px;text-transform:none;font-size:12px;font-family:'Poppins',sans-serif;">
+                <input type="checkbox" name="Acepta contacto" value="Si" required/>
+                Acepto que IBERO Tijuana me contacte vía WhatsApp o correo. <span class="req">*</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- ÉXITO -->
+        <div class="form-success" id="form-success">
+          <div class="success-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <h3>¡<span>Hazlo Realidad!</span> 🎉</h3>
+          <p>Tu solicitud fue enviada. Un asesor de IBERO Tijuana te contactará muy pronto.</p>
+          <a class="wa-link-btn" href="https://wa.me/526643613915?text=Hola%21%20Acabo%20de%20registrarme%20como%20aspirante%20y%20me%20gustar%C3%ADa%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener noreferrer">
+            <svg width="17" height="17" viewBox="0 0 32 32" fill="none"><path fill="#fff" d="M16 2C8.268 2 2 8.268 2 16c0 2.194.622 4.24 1.701 5.977L2 26l4.3-1.263A13.94 13.94 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm5.5 19.3c-.24.675-1.42 1.29-1.95 1.37-.5.075-1.13.107-1.826-.115-.42-.135-.96-.315-1.65-.615-2.9-1.252-4.8-4.148-4.944-4.34-.144-.192-1.17-1.556-1.17-2.967 0-1.41.737-2.104 1-2.38.262-.277.574-.347.765-.347.19 0 .383.002.55.01.177.01.414-.067.648.494.24.575.814 1.985.885 2.13.072.144.12.312.024.504-.096.192-.144.312-.287.48-.144.168-.302.376-.43.505-.143.144-.292.3-.125.588.167.288.742 1.224 1.593 1.982 1.094.975 2.016 1.276 2.304 1.42.287.144.455.12.623-.072.168-.192.72-.84.912-1.128.192-.288.383-.24.647-.144.264.096 1.675.79 1.963.934.288.144.48.216.551.336.07.12.07.695-.17 1.37z"/></svg>
+            Seguir por WhatsApp
+          </a>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="form-footer-nav" id="form-footer">
+      <button type="button" class="btn-back" id="btn-back" onclick="prevStep()" style="visibility:hidden">← Anterior</button>
+      <button type="button" class="btn-next" id="btn-next" onclick="nextStep()">Siguiente →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ BARRA INFO ══════════ -->
+<div class="info-bar">
+  <div class="info-bar-inner">
+    <div class="info-col">
+      <span class="info-icon">📅</span>
+      <div class="info-label">Inicio de Clases</div>
+      <div class="info-val">Agosto 2026</div>
+      <div class="info-sub">Periodo Otoño 2026</div>
+    </div>
+    <div class="info-col">
+      <span class="info-icon">🏛️</span>
+      <div class="info-label">Modalidad</div>
+      <div class="info-val">100% Presencial</div>
+      <div class="info-sub">Campus Río, Tijuana</div>
+    </div>
+    <div class="info-col">
+      <span class="info-icon">🎓</span>
+      <div class="info-label">Becas</div>
+      <div class="info-val">Hasta 70%</div>
+      <div class="info-sub">Según perfil socioeconómico</div>
+    </div>
+    <div class="info-col">
+      <span class="info-icon">📋</span>
+      <div class="info-label">Registro</div>
+      <div class="info-val">Abierto Ahora</div>
+      <div class="info-sub">Cupos limitados</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ POR QUÉ IBERO ══════════ -->
+<div class="section">
+  <div class="objetivo-grid">
+    <div>
+      <div class="sec-label">Por qué elegir IBERO</div>
+      <h2 class="sec-title">Una educación que transforma vidas</h2>
+      <p class="sec-desc" style="margin-bottom:32px;">La Universidad Iberoamericana Tijuana forma profesionistas íntegros, críticos y comprometidos con la sociedad, con una sólida formación humanista y técnica para destacar en el mercado laboral nacional e internacional.</p>
+      <a href="#hero" style="display:inline-flex;align-items:center;gap:8px;background:var(--rojo);color:#fff;text-decoration:none;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;padding:13px 28px;border-radius:50px;box-shadow:0 4px 16px rgba(224,0,52,0.3);transition:all 0.2s;">Iniciar mi registro →</a>
+    </div>
+    <div class="obj-cards">
+      <div class="obj-card"><div class="obj-ico">🌐</div><div class="obj-title">Red Global Jesuita</div><div class="obj-desc">Acceso a más de 200 universidades jesuitas en el mundo para intercambios académicos.</div></div>
+      <div class="obj-card"><div class="obj-ico">🤝</div><div class="obj-title">Vinculación Empresarial</div><div class="obj-desc">Convenios con empresas líderes en Tijuana y San Diego para prácticas profesionales.</div></div>
+      <div class="obj-card"><div class="obj-ico">🏆</div><div class="obj-title">Excelencia Académica</div><div class="obj-desc">Profesores con experiencia profesional activa y formación de posgrado.</div></div>
+      <div class="obj-card"><div class="obj-ico">💡</div><div class="obj-title">Formación Integral</div><div class="obj-desc">Liderazgo, ética, innovación y responsabilidad social como pilares de tu educación.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ CARRERAS ══════════ -->
+<section class="carreras-section" id="carreras">
+  <div class="carreras-inner">
+    <div class="carreras-header">
+      <div class="sec-label">Oferta Educativa 2026</div>
+      <h2 class="sec-title">Elige tu carrera</h2>
+      <p class="sec-desc">11 programas de licenciatura e ingeniería diseñados para desarrollar tu máximo potencial y abrirte las puertas al mundo profesional.</p>
+    </div>
+    <div class="areas-tabs">
+      <button class="tab-btn active" onclick="filtrar('todas',this)">Todas</button>
+      <button class="tab-btn" onclick="filtrar('salud',this)">Ciencias de la Salud</button>
+      <button class="tab-btn" onclick="filtrar('ingenieria',this)">Ingeniería</button>
+      <button class="tab-btn" onclick="filtrar('negocios',this)">Negocios</button>
+      <button class="tab-btn" onclick="filtrar('social',this)">Social y Humanidades</button>
+      <button class="tab-btn" onclick="filtrar('arte',this)">Arte y Diseño</button>
+    </div>
+    <div class="carreras-grid">
+      <div class="carrera-card" data-area="salud"><div class="carrera-area">Ciencias de la Salud</div><div class="carrera-ico">🩺</div><div class="carrera-nombre">Lic. en Medicina</div><div class="carrera-grado">Licenciatura · 6 años</div><a class="carrera-link" href="#hero">Solicitar información →</a></div>
+      <div class="carrera-card" data-area="salud"><div class="carrera-area">Ciencias de la Salud</div><div class="carrera-ico">🥗</div><div class="carrera-nombre">Lic. en Nutrición</div><div class="carrera-grado">Licenciatura · 4 años</div><a class="carrera-link" href="#hero">Solicitar información →</a></div>
+      <div class="carrera-card" data-area="salud"><div class="carrera-area">Ciencias de la Salud</div><div class="carrera-ico">💉</div><div class="carrera-nombre">Lic. en Enfermería</div><div class="carrera-grado">Licenciatura · 4 años</div><a class="carrera-link" href="#hero">Solicitar información →</a></div>
+      <div class="carrera-card" data-area="ingenieria"><div class="carrera-area">Ingeniería</div><div class="carrera-ico">🤖</div><div class="carrera-nombre">Ing. en Mecatrónica</div><div class="carrera-grado">Ingeniería · 4.5 años</div><a class="carrera-link" href="#hero">Solicitar información →</a></div>
+      <div class="carrera-card" data-area="ingenieria"><div class="carrera-area">Ingeniería</div><div class="carrera-ico">⚙️</div><div class="carrera-nombre">Ing. Industrial en Manufactura Inteligente</div><div class="carrera-grado">Ingeniería · 4.5 años</div><a class="carrera-link" href="#hero">Solicitar información →</a></div>
+      <div class="carrera-card" data-area="negocios"><div class="carrera-area">Negocios</div><div class="carrera-ico">📊</div><div class="carrera-nombre">Lic. en Administración de Empresas</div><div class="carrera-grado">Licenciatura · 4 años</div><a class="carrera-link" href="#hero">Solicitar información →</a></div>
+      <div class="carrera-card" data-area="negocios"><div class="carrera-area">Negocios</div><div class="carrera-ico">🌍</div><div class="carrera-nombre">Lic. en Administración de Negocios Internacionales</div><div class="carrera-grado">Licenciatura · 4 años</div><a class="carrera-link" href="#hero">Solicitar información →</a></div>
+      <div class="carrera-card" data-area="social"><div class="carrera-area">Social y Humanidades</div><div class="carrera-ico">⚖️</div><div class="carrera-nombre">Lic. en Derecho</div><div class="carrera-grado">Licenciatura · 4 años</div><a class="carrera-link" href="#hero">Solicitar información →</a></div>
+      <div class="carrera-card" data-area="social"><div class="carrera-area">Social y Humanidades</div><div class="carrera-ico">📡</div><div class="carrera-nombre">Lic. en Comunicación</div><div class="carrera-grado">Licenciatura · 4 años</div><a class="carrera-link" href="#hero">Solicitar información →</a></div>
+      <div class="carrera-card" data-area="social"><div class="carrera-area">Social y Humanidades</div><div class="carrera-ico">🧠</div><div class="carrera-nombre">Lic. en Psicología</div><div class="carrera-grado">Licenciatura · 4 años</div><a class="carrera-link" href="#hero">Solicitar información →</a></div>
+      <div class="carrera-card" data-area="arte"><div class="carrera-area">Arte y Diseño</div><div class="carrera-ico">🏗️</div><div class="carrera-nombre">Lic. en Arquitectura</div><div class="carrera-grado">Licenciatura · 5 años</div><a class="carrera-link" href="#hero">Solicitar información →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PROCESO (acordeón) ══════════ -->
+<div class="section" id="proceso">
+  <div class="sec-label">Proceso de Admisión</div>
+  <h2 class="sec-title">¿Cómo ingresar a IBERO Tijuana?</h2>
+  <p class="sec-desc">El proceso es claro y siempre acompañado. Un asesor te guiará en cada etapa sin costo.</p>
+  <div class="faq-list">
+    <div class="faq-item open">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>01 — Registro de Aspirante</span><span class="faq-ico">+</span></div>
+      <div class="faq-a">Llena el formulario de aspirante con tus datos personales y académicos. Es completamente gratuito y puedes hacerlo en línea desde esta página. Un asesor te contactará en menos de 24 horas para orientarte en los siguientes pasos.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>02 — Entrega de Documentos</span><span class="faq-ico">+</span></div>
+      <div class="faq-a">Presenta tu certificado de preparatoria (o constancia si aún cursas), acta de nacimiento, CURP, identificación oficial y fotografías tamaño infantil. Para algunas carreras de salud pueden solicitarse documentos adicionales.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>03 — Examen de Admisión</span><span class="faq-ico">+</span></div>
+      <div class="faq-a">Dependiendo de la carrera, puedes presentar el examen CENEVAL (EXANI-II) o el examen propio de IBERO Tijuana. Tu asesor te indicará cuál aplica y las fechas disponibles.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>04 — Resultados e Inscripción</span><span class="faq-ico">+</span></div>
+      <div class="faq-a">Una vez aprobado el proceso, recibes tu carta de aceptación oficial. Realizas tu pago de inscripción, eliges tu horario y ¡listo! Serás parte de la comunidad IBERO Tijuana a partir de agosto 2026.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)"><span>05 — Becas y Financiamiento</span><span class="faq-ico">+</span></div>
+      <div class="faq-a">IBERO Tijuana ofrece becas socioeconómicas de hasta el 70%, becas por excelencia académica y apoyos a través de programas federales. El proceso de solicitud de beca se hace de manera paralela al proceso de admisión.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ FAQ ══════════ -->
+<div style="background:var(--gris-bg);" id="preguntas">
+  <div class="section" style="padding-top:72px;padding-bottom:72px;">
+    <div class="sec-label">Preguntas Frecuentes</div>
+    <h2 class="sec-title">Resolvemos tus dudas</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>¿Tienen clases en línea?</span><span class="faq-ico">+</span></div>
+        <div class="faq-a">No. IBERO Tijuana es 100% presencial escolarizado. Todas las clases se imparten en nuestro Campus Río, garantizando una experiencia universitaria completa con acceso a laboratorios, biblioteca y vida estudiantil.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>¿Puedo hacer intercambio al extranjero?</span><span class="faq-ico">+</span></div>
+        <div class="faq-a">Sí. Como parte de la red jesuita internacional, tienes acceso a más de 200 universidades en el mundo para intercambios de uno o dos semestres, con apoyos económicos disponibles.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>¿Cuándo inician las clases para 2026?</span><span class="faq-ico">+</span></div>
+        <div class="faq-a">Las clases del periodo Otoño 2026 inician en agosto. Te recomendamos registrarte cuanto antes ya que los cupos son limitados y el proceso de admisión tiene tiempos específicos.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span>¿Cómo funciona el proceso de beca?</span><span class="faq-ico">+</span></div>
+        <div class="faq-a">El proceso se evalúa con base en un estudio socioeconómico y el promedio académico. Puedes solicitarlo durante tu proceso de admisión. Las becas van del 10% al 70% de la colegiatura y se renuevan cada semestre.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="ft-name">IBERO Tijuana</div>
+      <div class="ft-univ">Universidad Iberoamericana</div>
+      <p class="ft-desc">Formamos profesionistas comprometidos con la excelencia, la justicia social y el servicio a México y al mundo.</p>
+      <a class="ft-wa" href="https://wa.me/526643613915?text=Hola%21%20Me%20interesa%20conocer%20las%20carreras%20de%20IBERO%20Tijuana%202026." target="_blank" rel="noopener noreferrer">
+        <svg width="17" height="17" viewBox="0 0 32 32" fill="none"><path fill="#fff" d="M16 2C8.268 2 2 8.268 2 16c0 2.194.622 4.24 1.701 5.977L2 26l4.3-1.263A13.94 13.94 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm5.5 19.3c-.24.675-1.42 1.29-1.95 1.37-.5.075-1.13.107-1.826-.115-.42-.135-.96-.315-1.65-.615-2.9-1.252-4.8-4.148-4.944-4.34-.144-.192-1.17-1.556-1.17-2.967 0-1.41.737-2.104 1-2.38.262-.277.574-.347.765-.347.19 0 .383.002.55.01.177.01.414-.067.648.494.24.575.814 1.985.885 2.13.072.144.12.312.024.504-.096.192-.144.312-.287.48-.144.168-.302.376-.43.505-.143.144-.292.3-.125.588.167.288.742 1.224 1.593 1.982 1.094.975 2.016 1.276 2.304 1.42.287.144.455.12.623-.072.168-.192.72-.84.912-1.128.192-.288.383-.24.647-.144.264.096 1.675.79 1.963.934.288.144.48.216.551.336.07.12.07.695-.17 1.37z"/></svg>
+        664-361-3915
+      </a>
+    </div>
+    <div>
+      <div class="ft-col-title">Carreras</div>
+      <ul class="ft-list">
+        <li>Lic. en Medicina</li>
+        <li>Lic. en Nutrición</li>
+        <li>Lic. en Enfermería</li>
+        <li>Lic. en Arquitectura</li>
+        <li>Lic. en Comunicación</li>
+        <li>Lic. en Derecho</li>
+      </ul>
+    </div>
+    <div>
+      <div class="ft-col-title">Más Carreras</div>
+      <ul class="ft-list">
+        <li>Ing. en Mecatrónica</li>
+        <li>Ing. Industrial en Manufactura</li>
+        <li>Lic. en Adm. de Empresas</li>
+        <li>Lic. en Negocios Internacionales</li>
+        <li>Lic. en Psicología</li>
+        <li><a href="https://tijuana.ibero.mx" target="_blank" rel="noopener noreferrer">tijuana.ibero.mx →</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Universidad Iberoamericana Tijuana. Todos los derechos reservados.</p>
+    <a href="https://tijuana.ibero.mx/avisos-privacidad" target="_blank" rel="noopener noreferrer">Aviso de Privacidad</a>
+  </div>
+</footer>
+
+<!-- WA flotante -->
+<a class="wa-float" href="https://wa.me/526643613915?text=Hola%21%20Me%20gustar%C3%ADa%20informaci%C3%B3n%20sobre%20las%20carreras%20y%20admisiones%202026%20de%20IBERO%20Tijuana." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp IBERO Tijuana">
+  <svg viewBox="0 0 32 32" fill="none" width="28" height="28"><path fill="#fff" d="M16 2C8.268 2 2 8.268 2 16c0 2.194.622 4.24 1.701 5.977L2 26l4.3-1.263A13.94 13.94 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm5.5 19.3c-.24.675-1.42 1.29-1.95 1.37-.5.075-1.13.107-1.826-.115-.42-.135-.96-.315-1.65-.615-2.9-1.252-4.8-4.148-4.944-4.34-.144-.192-1.17-1.556-1.17-2.967 0-1.41.737-2.104 1-2.38.262-.277.574-.347.765-.347.19 0 .383.002.55.01.177.01.414-.067.648.494.24.575.814 1.985.885 2.13.072.144.12.312.024.504-.096.192-.144.312-.287.48-.144.168-.302.376-.43.505-.143.144-.292.3-.125.588.167.288.742 1.224 1.593 1.982 1.094.975 2.016 1.276 2.304 1.42.287.144.455.12.623-.072.168-.192.72-.84.912-1.128.192-.288.383-.24.647-.144.264.096 1.675.79 1.963.934.288.144.48.216.551.336.07.12.07.695-.17 1.37z"/></svg>
+</a>
+
+<script>
+  // FILTRO CARRERAS
+  function filtrar(area, btn) {
+    document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.carrera-card').forEach(c => {
+      c.classList.toggle('oculta', area !== 'todas' && c.dataset.area !== area);
+    });
+  }
+
+  // ACORDEÓN
+  function toggleFaq(el) {
+    var item = el.parentElement;
+    var isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // MULTI-STEP FORM
+  var paso = 1, total = 4;
+  var titulos = ['Datos Personales','Antecedentes Académicos','Carrera de Interés','Datos de Contacto'];
+  var subs = [
+    'Cuéntanos un poco sobre ti para comenzar tu proceso.',
+    'Comparte tu trayectoria académica previa.',
+    'Cuéntanos qué quieres estudiar.',
+    'Así podremos contactarte y darte seguimiento personalizado.'
+  ];
+
+  function nextStep() {
+    if (paso < total) {
+      document.getElementById('sec-' + paso).classList.remove('active');
+      document.getElementById('sb-' + paso).classList.remove('active');
+      document.getElementById('sb-' + paso).classList.add('done');
+      paso++;
+      document.getElementById('sec-' + paso).classList.add('active');
+      document.getElementById('sb-' + paso).classList.add('active');
+      actualizarUI();
+    } else {
+      enviar();
+    }
+  }
+
+  function prevStep() {
+    if (paso > 1) {
+      document.getElementById('sec-' + paso).classList.remove('active');
+      document.getElementById('sb-' + paso).classList.remove('active');
+      paso--;
+      document.getElementById('sec-' + paso).classList.add('active');
+      document.getElementById('sb-' + paso).classList.remove('done');
+      document.getElementById('sb-' + paso).classList.add('active');
+      actualizarUI();
+    }
+  }
+
+  function actualizarUI() {
+    document.getElementById('form-title').textContent = titulos[paso - 1];
+    document.getElementById('form-sub').textContent = subs[paso - 1];
+    document.getElementById('prog').style.width = ((paso / total) * 100) + '%';
+    document.getElementById('btn-back').style.visibility = paso > 1 ? 'visible' : 'hidden';
+    var btn = document.getElementById('btn-next');
+    if (paso === total) {
+      btn.innerHTML = '✓ Enviar Solicitud';
+      btn.className = 'btn-submit';
+    } else {
+      btn.innerHTML = 'Siguiente →';
+      btn.className = 'btn-next';
+    }
+    document.querySelector('.form-body').scrollTop = 0;
+  }
+
+  function enviar() {
+    var btn = document.getElementById('btn-next');
+    btn.disabled = true;
+    btn.innerHTML = 'Enviando...';
+    var data = new FormData(document.getElementById('main-form'));
+    fetch('https://formspree.io/f/xrealyle', {
+      method: 'POST', body: data, headers: { 'Accept': 'application/json' }
+    })
+    .then(function(r) {
+      if (r.ok) {
+        document.getElementById('sec-4').classList.remove('active');
+        document.getElementById('form-footer').style.display = 'none';
+        document.getElementById('form-success').classList.add('active');
+        document.getElementById('prog').style.width = '100%';
+        document.getElementById('form-title').textContent = '¡Solicitud Enviada!';
+        document.getElementById('form-sub').textContent = 'Gracias por tu interés en IBERO Tijuana.';
+        document.getElementById('sb-4').classList.remove('active');
+        document.getElementById('sb-4').classList.add('done');
+      } else {
+        btn.disabled = false;
+        btn.innerHTML = '✓ Enviar Solicitud';
+        alert('Hubo un error. Por favor intenta de nuevo.');
+      }
+    })
+    .catch(function() {
+      btn.disabled = false;
+      btn.innerHTML = '✓ Enviar Solicitud';
+      alert('Error de conexión. Verifica tu internet e intenta de nuevo.');
+    });
+  }
+</script>
+</body>
+</html>
